@@ -1,10 +1,10 @@
-import { SearchForm } from "../components/SearchForm";
-import { Section } from "../components/Section";
-import { CocktailsList } from "../components/CocktailsList";
-import { Loader } from "../components/Loader";
-import { useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { searchByName } from "../api/cocktail-service";
+import { SearchForm } from '../components/SearchForm';
+import { Section } from '../components/Section';
+import { CocktailsList } from '../components/CocktailsList';
+import { Loader } from '../components/Loader';
+import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { searchByName } from '../api/cocktail-service';
 
 export const Cocktails = () => {
   const [cocktails, setCoctails] = useState([]);
@@ -13,7 +13,7 @@ export const Cocktails = () => {
   const handleFormSubmit = (value) => {
     setSearchParams({ query: value });
   };
-  const query = searchParams.get("query");
+  const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
     const getCoctailByName = async () => {
@@ -31,7 +31,8 @@ export const Cocktails = () => {
         </h1>
 
         <SearchForm onSubmit={handleFormSubmit} />
-        {cocktails.length > 0 && <CocktailsList cocktails={cocktails} />}
+        {cocktails?.length > 0 && <CocktailsList cocktails={cocktails} />}
+        {/* {cocktails ?? <CocktailsList cocktails={cocktails} />} */}
       </Section>
     </>
   );
